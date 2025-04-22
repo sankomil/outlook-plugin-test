@@ -1,0 +1,73 @@
+<!-- Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT License. -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Office JavaScript API -->
+    <script
+      type="text/javascript"
+      src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"
+    ></script>
+    <style>
+      .heading {
+        text-wrap: wrap;
+        font-weight: normal;
+      }
+
+      .loader {
+        width: 48px;
+        height: 48px;
+        border: 5px solid #07f;
+        border-bottom-color: transparent;
+        border-radius: 50%;
+        display: inline-block;
+        box-sizing: border-box;
+        animation: rotation 1s linear infinite;
+        align-self: center;
+      }
+
+      @keyframes rotation {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <h3 class="heading">
+      This add-in summarises the currently open email using LF AI Agent. Always
+      double check the contents of AI generated results before taking action on
+      them.
+    </h3>
+    <span class="loader" id="loader"></span>
+  </body>
+
+  <script defer>
+    Office.onReady((info) => {
+      if (info.host === Office.HostType.Outlook) {
+        summariseText();
+      }
+    });
+
+    summariseText();
+
+    function summariseText() {
+      Office.context.mailbox.item.body.setAsync(
+        "Hello world!",
+        {
+          coercionType: "html", // Write text as HTML
+        },
+
+        // Callback method to check that setAsync succeeded
+        function (asyncResult) {
+          if (asyncResult.status == Office.AsyncResultStatus.Failed) {
+            write(asyncResult.error.message);
+          }
+        }
+      );
+    }
+  </script>
+</html>
