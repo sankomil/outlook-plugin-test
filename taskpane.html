@@ -56,7 +56,7 @@
 
     function summariseText() {
       Office.context.mailbox.item.body.getAsync(
-        Office.CoercionType.Html,
+        Office.CoercionType.Text,
         // Callback method to check that setAsync succeeded
         function (asyncResult) {
           if (asyncResult.status == Office.AsyncResultStatus.Failed) {
@@ -64,7 +64,7 @@
           } else {
             console.log(
               "great success",
-              asyncResult.value.split('<p class="MsoNormal"><b')[0]
+              asyncResult.value
             );
           }
         }
