@@ -62,6 +62,11 @@
           if (asyncResult.status == Office.AsyncResultStatus.Failed) {
             console.error(asyncResult.error.message);
           } else {
+            const loader = document.getElementById("loader");
+            loader.remove();
+            let elemDiv = document.createElement("div");
+            elemDiv.innerHTML = asyncResult.value.split("From: ")[0];
+            document.body.appendChild(elemDiv);
             console.log(
               "great success",
               asyncResult.value.split("From: ")[0]
