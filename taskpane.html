@@ -52,7 +52,7 @@
       }
     });
 
-    summariseText();
+    //summariseText();
 
     function summariseText() {
       Office.context.mailbox.item.body.getAsync(
@@ -64,7 +64,7 @@
           } else {
             console.log(
               "great success",
-              asyncResult.value
+              asyncResult.value.split("From: ")[0]
             );
           }
         }
