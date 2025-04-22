@@ -55,6 +55,7 @@
     summariseText();
 
     function summariseText() {
+      console.log("test val ", Office.context.mailbox.item);
       Office.context.mailbox.item.body.setAsync(
         "Hello world!",
         {
@@ -67,7 +68,6 @@
             write(asyncResult.error.message);
           }
         }
-        console.log("test val ", Office.context.mailbox.item);
       );
     }
   </script>
