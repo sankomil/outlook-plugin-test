@@ -55,18 +55,14 @@
     summariseText();
 
     function summariseText() {
-      console.log("test val ", Office.context.mailbox.item);
-      Office.context.mailbox.item.body.setAsync(
-        "Hello world!",
-        {
-          coercionType: "html", // Write text as HTML
-        },
-
+      Office.context.mailbox.item.body.getAsync(
+        Office.CoercionType.Html,
         // Callback method to check that setAsync succeeded
         function (asyncResult) {
           if (asyncResult.status == Office.AsyncResultStatus.Failed) {
-            write(asyncResult.error.message);
+            console.error(asyncResult.error.message);
           }
+          else {console.log("great success", asyncResult)}
         }
       );
     }
