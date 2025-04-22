@@ -61,8 +61,12 @@
         function (asyncResult) {
           if (asyncResult.status == Office.AsyncResultStatus.Failed) {
             console.error(asyncResult.error.message);
+          } else {
+            console.log(
+              "great success",
+              asyncResult.value.split('<p class="MsoNormal"><b')[0]
+            );
           }
-          else {console.log("great success", asyncResult)}
         }
       );
     }
